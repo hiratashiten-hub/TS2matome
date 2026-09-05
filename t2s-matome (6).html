@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T2S まとめ一覧 — 幸せの重要ポイント</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F4EE;
+    --ink:#2C2A26;
+    --ink-soft:#5B564C;
+    --line:#DDD6C7;
+    --card:#FFFFFE;
+    --c-prologue:#2C3E66;
+    --c-ch1:#3F6E52;
+    --c-ch2:#B8863B;
+    --c-ch3:#9C3B3B;
+    --c-ch4:#2C4C8C;
+    --c-ch5:#3F6E52;
+    --c-ch6:#5B4A8A;
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme: dark){
+      --paper:#1E1C19; --ink:#EFE9DD; --ink-soft:#B9B2A2; --line:#3A362E; --card:#26231F;
+    }
+  }
+  :root[data-theme="dark"]{ --paper:#1E1C19; --ink:#EFE9DD; --ink-soft:#B9B2A2; --line:#3A362E; --card:#26231F; }
+  *{box-sizing:border-box;}
+  svg{ overflow: visible; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:"Noto Sans JP", sans-serif; line-height:1.85; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.serif{ font-family:"Shippori Mincho", serif; }
+  header.top{ position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:18px 20px 0; }
+  .titlewrap{ max-width:760px; margin:0 auto; }
+  .kicker{ font-size:12px; letter-spacing:.08em; color:var(--ink-soft); }
+  h1{ font-size:26px; font-weight:700; margin:4px 0 14px; color:var(--ink); }
+  nav.chapters{ max-width:760px; margin:0 auto; display:flex; gap:8px; overflow-x:auto; padding-bottom:12px; scrollbar-width:thin; }
+  nav.chapters a{ flex:0 0 auto; font-size:13px; text-decoration:none; color:var(--ink); background:var(--card); border:1px solid var(--line); padding:7px 14px; border-radius:20px; white-space:nowrap; }
+  main{ max-width:760px; margin:0 auto; padding:32px 20px 80px; }
+  section.chapter{ margin-bottom:56px; scroll-margin-top:96px; }
+  .chapter-head{ display:flex; align-items:baseline; gap:12px; border-bottom:2px solid var(--accent, var(--ink)); padding-bottom:10px; margin-bottom:6px; }
+  .chapter-num{ font-size:13px; font-weight:700; color:var(--accent); border:1px solid var(--accent); border-radius:4px; padding:2px 8px; }
+  .chapter-head h2{ font-size:21px; margin:0; font-weight:700; }
+  .chapter-sub{ font-size:13.5px; color:var(--ink-soft); margin:6px 0 22px; }
+  .pageref{ font-size:12px; color:var(--ink-soft); }
+  .point{ display:flex; gap:14px; padding:16px 0; border-top:1px solid var(--line); }
+  .point:first-of-type{ border-top:none; }
+  .point .num{ flex:0 0 30px; font-family:"Shippori Mincho", serif; font-size:17px; font-weight:700; color:var(--accent); }
+  .point .body h3{ font-size:15.5px; margin:0 0 4px; font-weight:700; }
+  .point .body p{ margin:0; font-size:14.5px; color:var(--ink); }
+  .point .body p + p{ margin-top:6px; }
+  .callout{ background:var(--card); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:6px; padding:16px 18px; margin:18px 0; font-size:14px; }
+  .callout .label{ font-size:11px; letter-spacing:.06em; color:var(--accent); font-weight:700; margin-bottom:6px; }
+  ul.tags{ list-style:none; margin:8px 0 0; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
+  ul.tags li{ font-size:13px; background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:5px 12px; }
+  ol.simple{ margin:10px 0; padding-left:20px; }
+  ol.simple li{ margin-bottom:6px; font-size:14.5px; }
+  .pyramid{ margin:20px 0 26px; }
+  .pyramid .tier{ margin:0 auto 4px; color:#fff; text-align:center; padding:9px 0; font-size:13px; border-radius:3px; font-family:"Shippori Mincho", serif; }
+  .disciplines{ display:grid; gap:14px; }
+  .discipline-card{ background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px 18px; }
+  .discipline-card h4{ margin:0 0 8px; font-size:14px; display:flex; align-items:center; gap:8px; }
+  .discipline-card h4 .dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); display:inline-block; }
+  .discipline-card p{ margin:0 0 6px; font-size:14px; }
+  .discipline-card p:last-child{ margin-bottom:0; }
+  .checklist{ list-style:none; margin:8px 0; padding:0; }
+  .checklist li{ font-size:14px; padding:3px 0; }
+  .checklist li:before{ content:"☐ "; color:var(--accent); }
+  table.control{ width:100%; border-collapse:collapse; margin:16px 0; font-size:13.5px; }
+  table.control th{ text-align:left; background:var(--card); border:1px solid var(--line); padding:8px 10px; font-size:12.5px; }
+  table.control td{ border:1px solid var(--line); padding:8px 10px; vertical-align:top; }
+  .note{ font-size:12.5px; color:var(--ink-soft); font-style:italic; margin-top:6px; }
+  .dual-row{ display:flex; align-items:stretch; gap:10px; margin-bottom:8px; }
+  .dual-box{ flex:1; color:#fff; padding:10px 14px; border-radius:6px; font-size:13px; display:flex; align-items:center; }
+  .dual-arrow{ flex:0 0 28px; display:flex; align-items:center; justify-content:center; color:var(--ink-soft); font-size:18px; }
+  .habit-bar{ display:flex; align-items:center; gap:12px; color:#fff; padding:10px 16px; border-radius:6px; margin-bottom:8px; font-size:14px; }
+  .habit-bar .n{ font-family:"Shippori Mincho", serif; font-size:16px; font-weight:700; flex:0 0 auto; }
+  footer{ max-width:760px; margin:0 auto; padding:0 20px 60px; font-size:12px; color:var(--ink-soft); text-align:center; }
+  @media (max-width:480px){ h1{ font-size:22px; } .chapter-head h2{ font-size:19px; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="titlewrap">
+    <div class="kicker">Takahashi 2days Seminar 2026 ver.2 — T2Sのまとめ一覧</div>
+    <h1>幸せの重要ポイント・完全まとめ</h1>
+  </div>
+  <nav class="chapters">
+    <a href="#prologue">序章</a>
+    <a href="#ch1">第1章</a>
+    <a href="#ch2">第2章</a>
+    <a href="#ch3">第3章</a>
+    <a href="#ch4">第4章</a>
+    <a href="#ch5">第5章</a>
+    <a href="#ch6">第6章</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- 序章 P.9-28 -->
+  <section class="chapter" id="prologue" style="--accent:var(--c-prologue)">
+    <div class="chapter-head">
+      <span class="chapter-num">序章</span>
+      <h2>AI時代の今、なぜ「幸せの攻略」が必要か</h2>
+    </div>
+    <p class="chapter-sub">10年後まで続く成長プロセス。長期的かつバランスの取れた豊かで幸せな人生を手にし続ける。<span class="pageref">（P.9-28）</span></p>
+
+    <h3 class="serif" style="font-size:16px;margin:24px 0 4px;">効果的に学ぶために<span class="pageref">（P.14-28）</span></h3>
+    <div class="point"><div class="num">1</div><div class="body">
+      <h3>目的を明確にする</h3>
+      <p>目的を明確にすることが、限られた脳のエネルギーを願望実現のために無駄なく使える技術である。</p>
+    </div></div>
+    <div class="point"><div class="num">2</div><div class="body">
+      <h3>学ぶ8つの目的</h3>
+      <p>学びで得られる価値は知識だけではない。8つの目的を理解する。</p>
+      <p class="note">「学べば学ぶほど、自分が何も知らなかった事に気づく。気づけば気づくほど、また学びたくなる」— アルベルト・アインシュタイン</p>
+    </div></div>
+    <div class="point"><div class="num">3</div><div class="body">
+      <h3>学習のステップ</h3>
+      <p>終わりをイメージしてから、学び始める。AIで1〜5を補完し、6「行動する」から人が実践する。</p>
+    </div></div>
+    <div class="point"><div class="num">4</div><div class="body">
+      <h3>パレートの法則（80対20の法則）</h3>
+      <p>20%の最重要なことに集中するだけで、8割決まる。だから、20%の重要事項を優先する。</p>
+    </div></div>
+    <div class="point"><div class="num">5</div><div class="body">
+      <h3>プロテジェ効果（教えることによる学習）</h3>
+      <p>「人に教える」「教えるつもりで準備する」と学習効果が高まる。</p>
+    </div></div>
+    <div class="point"><div class="num">6</div><div class="body">
+      <h3>抽象度</h3>
+      <p>抽象度を高め、全体的な視点が見れることで見えていなかった大切なことが見える。</p>
+    </div></div>
+
+    <h3 class="serif" style="font-size:16px;margin:28px 0 4px;">パラダイムという土台</h3>
+    <div class="point"><div class="num">7</div><div class="body">
+      <h3>パラダイム</h3>
+      <p>全ての結果はパラダイムから始まり、結果は、パラダイムが作っている。『私は間違っているかも』</p>
+      <div class="callout" style="margin:10px 0 0;">
+        <div class="label">「正義」もパラダイム</div>
+        <p>・自分の意見はあくまで「100通りあるうちの1つの価値観」と捉える<br>
+        ・本当の意味での「正義」とは、自分の考えを押し付けることではなく、お互いの違いを「理解しようとする心」「そこに挑戦する心」を持つ。理解は同意ではなく、自分の信じる道を選んでよい（健全な妥協）。</p>
+      </div>
+    </div></div>
+    <div class="point"><div class="num">8</div><div class="body">
+      <h3>コンフォートゾーン</h3>
+      <p>人は無意識にコンフォートゾーンに戻るため、コンフォートゾーンを移動することが、人生の勝ち方である。</p>
+    </div></div>
+    <div class="point"><div class="num">9</div><div class="body">
+      <h3>セルフイメージ</h3>
+      <p>心の中で信じている（思い込んでいる）自分自身の姿。</p>
+    </div></div>
+    <div class="point"><div class="num">10</div><div class="body">
+      <h3>時代は変化する</h3>
+      <p>時代が変わっても変わらない3つ：</p>
+      <svg viewBox="-20 -15 340 175" style="max-width:320px;display:block;margin:10px auto 0;">
+<polygon points="100.0,0.0 100.0,0.0 133.3,46.7 66.7,46.7" fill="#8FA7B3" stroke="#F7F4EE" stroke-width="1.5"/>
+<line x1="116.7" y1="23.3" x2="200" y2="23.3" stroke="#B9B2A2" stroke-width="1"/>
+<text x="206" y="23.3" font-size="12" fill="#2C2A26" text-anchor="start" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">③選択は自由</text>
+<polygon points="66.7,46.7 133.3,46.7 166.7,93.3 33.3,93.3" fill="#4C7A94" stroke="#F7F4EE" stroke-width="1.5"/>
+<text x="100.0" y="70.0" font-size="12" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">②時代は変化する</text>
+<polygon points="33.3,93.3 166.7,93.3 200.0,140.0 0.0,140.0" fill="#2C3E66" stroke="#F7F4EE" stroke-width="1.5"/>
+<text x="100.0" y="116.7" font-size="12" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">①原則中心</text>
+</svg>
+    </div></div>
+  </section>
+
+  <!-- 特別編 AI時代 (P.9-28内、序章末尾) -->
+  <section class="chapter" id="ai" style="--accent:var(--c-prologue)">
+    <div class="chapter-head">
+      <span class="chapter-num">10・特別編</span>
+      <h2>AI時代</h2>
+    </div>
+    <div class="callout">
+      <p>AIとはあなたの「意図」を実現するための最強のパートナーである。</p>
+      <p>AIは「最適解」を提案できても、「責任」を取ることはできない。正解はAIにはなく、自己責任で自分の価値観やビジョンから意思決定できる力が大事。</p>
+      <p>現場に行って五感で一次情報を得る。</p>
+    </div>
+    <div style="display:flex;gap:10px;margin:18px 0 6px;font-size:12px;font-weight:700;">
+      <div style="flex:1;background:#7A2E2E;color:#fff;padding:8px 14px;border-radius:6px;text-align:center;">AI時代の不安</div>
+      <div style="flex:0 0 28px;"></div>
+      <div style="flex:1;background:#1F2E4A;color:#fff;padding:8px 14px;border-radius:6px;text-align:center;">T2Sの解決策</div>
+    </div>
+    <div class="dual-row">
+      <div class="dual-box" style="background:#9C3B3B;">①自分の価値への不安</div>
+      <div class="dual-arrow">→</div>
+      <div class="dual-box" style="background:#5B4A8A;">自分の本当の価値を理解し、自分だけの幸せと天命を明確にして生きる</div>
+    </div>
+    <div class="dual-row">
+      <div class="dual-box" style="background:#B4472F;">②比較が倍増（不幸感が倍増）</div>
+      <div class="dual-arrow">→</div>
+      <div class="dual-box" style="background:#2C4C8C;">自分軸を持つ</div>
+    </div>
+    <div class="dual-row">
+      <div class="dual-box" style="background:#C1552C;">③正解・答えが多すぎる（情報過多）</div>
+      <div class="dual-arrow">→</div>
+      <div class="dual-box" style="background:#3F6E52;">良心に従って、自分が心底納得した選択を正解にする</div>
+    </div>
+    <div class="dual-row">
+      <div class="dual-box" style="background:#B8863B;">④人とのつながりが減る</div>
+      <div class="dual-arrow">→</div>
+      <div class="dual-box" style="background:#6E8C4E;">一番大切な人と愛し愛されの人間関係を高める</div>
+    </div>
+    <div class="dual-row">
+      <div class="dual-box" style="background:#8C6B4E;">⑤生き甲斐・やりがいが見えない</div>
+      <div class="dual-arrow">→</div>
+      <div class="dual-box" style="background:#8C7A3B;">人生の目的・ビジョン・天命を明確にして生きる</div>
+    </div>
+  </section>
+
+  <!-- 第1章 P.29-53 -->
+  <section class="chapter" id="ch1" style="--accent:var(--c-ch1)">
+    <div class="chapter-head">
+      <span class="chapter-num">第1章</span>
+      <h2>幸せの正体を構造で知る</h2>
+    </div>
+    <p class="chapter-sub"><span class="pageref">（P.29-53）</span></p>
+
+    <h3 class="serif" style="font-size:16px;margin:6px 0 4px;">1-1　幸せとは何か ー 定義と段階<span class="pageref">（P.30）</span></h3>
+    <div class="callout">
+      <p>幸せとは、安心・満足の状態。人の数だけ、幸せの形がある。幸せとは主観的幸福度。</p>
+    </div>
+
+    <h3 class="serif" style="font-size:16px;margin:26px 0 12px;">1-2　幸せを5つの学問から解き明かす</h3>
+    <div class="disciplines">
+      <div class="discipline-card">
+        <h4><span class="dot"></span>心理学<span class="pageref">P.32-36</span></h4>
+        <p>「何が人を幸せにするか」を観察・測定・統計で明らかにする学問。</p>
+        <p>幸せとは、良好な人間関係と生きがいを持って生きる中で、心が満たされている状態である。</p>
+        <p>人は8つの欲求を満たすと、ポジティブ感情を得られる。欲求をバランスよく満たすために8バランスで目標に落とし、習慣化する。</p>
+        <p>幸福が長期に幸せをつくり、快楽は短期の幸せをつくる。快楽が悪いのではなく、幸せになるには、長期の幸福を常にメインに、たまに快楽を入れてバランスを取ることが幸せの攻略法である。</p>
+        <p>①感情のエネルギーによって、わたしたちの生命は守られている（ネガティブ感情とポジティブ感情のバランス）<br>
+        ②幸せ感情は、思考と行為でコントロールできるようになる<br>
+        ③長期で変更するならば、潜在意識にプラスの記憶などを増やす事と前頭前野を鍛えて、脳のプログラムを変更する。<br>
+        ④あなたの感情は、あなたではない。空の青さがあなたで、雲や雨が感情である。常に自分の感情を客観的に見ることが重要である。</p>
+      </div>
+      <div class="discipline-card">
+        <h4><span class="dot"></span>生物学<span class="pageref">P.37-39</span></h4>
+        <p>「なぜその感情が存在するのか」を、進化・生存・繁殖の観点から明らかにする学問。</p>
+        <p>幸せとは、生存に有利な状態を、本能が「安心」として感じている状態である。</p>
+        <p>生物学的に見ると、幸せの原点は「安心・安全に生き残ること」。人は生き残るために、集団・仲間をつくり、役割を分け、比較機能を持つなど進化してきた。その生存戦略は私たちの遺伝子に刻まれている。また、男性脳・女性脳の違いも、生き残るための役割の違い。</p>
+        <p>人は「小さな集団での助け合い・承認し合う」のが幸せの生物学的な本質。だからこそ、違いを理解し合うことが、安心できる関係性をつくることが、幸せにつながる。</p>
+      </div>
+      <div class="discipline-card">
+        <h4><span class="dot"></span>脳科学<span class="pageref">P.40-45</span></h4>
+        <p>「その感情が何によって、どう引き起こされるか」を、脳内の物質・神経回路の働きから明らかにする学問。</p>
+        <p>幸せとは、安心や快の感情を生み出す脳内物質が分泌されている状態である。</p>
+        <p>幸せの脳内物質を出すことで、幸せになる。セロトニン、オキシトシン、ドーパミンの順番で、バランスよく脳内物質を出せる習慣形成をする（優先順位）。</p>
+      </div>
+      <div class="discipline-card">
+        <h4><span class="dot"></span>哲学<span class="pageref">P.46</span></h4>
+        <p>「幸せとは何であるべきか」を、自分の内側からの選択と論理で定義する学問。</p>
+        <p>幸せとは自分で選んだ生き方に意味と納得がある状態である。</p>
+        <p>哲学の共通点：幸せは、お金・成功・地位という「持っているかどうか」の問題ではなく、選択・態度・意味づけという「どう生きるか、何に意味を見出すか」の問題である。</p>
+        <p>幸せとは、自分の内側（選択・コントロール・意味づけ）によって、自分自身で"つくり出す"ものである。</p>
+      </div>
+      <div class="discipline-card">
+        <h4><span class="dot"></span>仏教<span class="pageref">P.47-49</span></h4>
+        <p>「どうすればその感情の揺れ（苦）から自由になれるか」を、外部の測定ではなく、心の観察と実践によって明らかにしようとする体系。</p>
+        <p>幸せは"欲を手放した"時の心の静けさ（涅槃の境地）。</p>
+        <p>四苦八苦に対して自分の中に「執着」を持たなければ、全ての「苦」から解放される（解釈の質と感謝の大きさによって変わる）。私たちはすでに幸せであることに気づく（足るを知る）。</p>
+      </div>
+      <div class="discipline-card">
+        <h4><span class="dot"></span>T2S的<span class="pageref">P.50-51</span></h4>
+        <p>あらゆる情報を客観的に集めて、自分が心の底から納得する幸せを創り出す方法。</p>
+        <p>幸せとは、自分だけのオリジナルの幸せを明確にし、後悔しない選択を重ね、自分らしく自然体で生きている状態。</p>
+      </div>
+    </div>
+
+    <h3 class="serif" style="font-size:16px;margin:28px 0 10px;">T2S的幸せの状態の6つのポイント</h3>
+    <ul class="tags">
+      <li>①欲をコントロールする</li>
+      <li>②欲を満たす</li>
+      <li>③四苦八苦と上手に付き合う</li>
+      <li>④比較や嫉妬と上手に付き合う</li>
+      <li>⑤意味と意義を持って生きる</li>
+      <li>⑥快楽ではなく幸福を選ぶ</li>
+    </ul>
+
+    <div class="callout" style="margin-top:24px;">
+      <div class="label">信頼 ＝ 人格 × 能力</div>
+      <p>自分との約束を守ると自信、自己信頼、自己尊敬が自動的に高まる。</p>
+      <p class="note" style="margin-bottom:14px;">《人格》10個の目標達成能力</p>
+      <svg viewBox="-15 -15 510 510" style="max-width:420px;width:100%;height:auto;display:block;margin:0 auto;">
+<path d="M 240.0,110.0 A 130,130 0 0 1 316.4,134.8 L 276.4,189.8 A 62,62 0 0 0 240.0,178.0 Z" fill="#9C3B3B" stroke="#F7F4EE" stroke-width="2"/>
+<path d="M 316.4,134.8 A 130,130 0 0 1 363.6,199.8 L 299.0,220.8 A 62,62 0 0 0 276.4,189.8 Z" fill="#B8863B" stroke="#F7F4EE" stroke-width="2"/>
+<path d="M 363.6,199.8 A 130,130 0 0 1 363.6,280.2 L 299.0,259.2 A 62,62 0 0 0 299.0,220.8 Z" fill="#3F6E52" stroke="#F7F4EE" stroke-width="2"/>
+<path d="M 363.6,280.2 A 130,130 0 0 1 316.4,345.2 L 276.4,290.2 A 62,62 0 0 0 299.0,259.2 Z" fill="#2C4C8C" stroke="#F7F4EE" stroke-width="2"/>
+<path d="M 316.4,345.2 A 130,130 0 0 1 240.0,370.0 L 240.0,302.0 A 62,62 0 0 0 276.4,290.2 Z" fill="#5B4A8A" stroke="#F7F4EE" stroke-width="2"/>
+<path d="M 240.0,370.0 A 130,130 0 0 1 163.6,345.2 L 203.6,290.2 A 62,62 0 0 0 240.0,302.0 Z" fill="#4C7A94" stroke="#F7F4EE" stroke-width="2"/>
+<path d="M 163.6,345.2 A 130,130 0 0 1 116.4,280.2 L 181.0,259.2 A 62,62 0 0 0 203.6,290.2 Z" fill="#7A5A9C" stroke="#F7F4EE" stroke-width="2"/>
+<path d="M 116.4,280.2 A 130,130 0 0 1 116.4,199.8 L 181.0,220.8 A 62,62 0 0 0 181.0,259.2 Z" fill="#8C6B4E" stroke="#F7F4EE" stroke-width="2"/>
+<path d="M 116.4,199.8 A 130,130 0 0 1 163.6,134.8 L 203.6,189.8 A 62,62 0 0 0 181.0,220.8 Z" fill="#5E6B73" stroke="#F7F4EE" stroke-width="2"/>
+<path d="M 163.6,134.8 A 130,130 0 0 1 240.0,110.0 L 240.0,178.0 A 62,62 0 0 0 203.6,189.8 Z" fill="#6E8C4E" stroke="#F7F4EE" stroke-width="2"/>
+<line x1="280.2" y1="116.4" x2="284.8" y2="102.1" stroke="#B9B2A2" stroke-width="1"/>
+<text x="287.9" y="92.6" font-size="13" fill="#2C2A26" text-anchor="start" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">仕組み作り</text>
+<line x1="345.2" y1="163.6" x2="357.3" y2="154.8" stroke="#B9B2A2" stroke-width="1"/>
+<text x="365.4" y="148.9" font-size="13" fill="#2C2A26" text-anchor="start" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">チーム作り</text>
+<line x1="370.0" y1="240.0" x2="385.0" y2="240.0" stroke="#B9B2A2" stroke-width="1"/>
+<text x="395.0" y="240.0" font-size="13" fill="#2C2A26" text-anchor="start" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">金銭管理</text>
+<line x1="345.2" y1="316.4" x2="357.3" y2="325.2" stroke="#B9B2A2" stroke-width="1"/>
+<text x="365.4" y="331.1" font-size="13" fill="#2C2A26" text-anchor="start" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">コミュニケーション</text>
+<line x1="280.2" y1="363.6" x2="284.8" y2="377.9" stroke="#B9B2A2" stroke-width="1"/>
+<text x="287.9" y="387.4" font-size="13" fill="#2C2A26" text-anchor="start" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">リーダーシップ</text>
+<line x1="199.8" y1="363.6" x2="195.2" y2="377.9" stroke="#B9B2A2" stroke-width="1"/>
+<text x="192.1" y="387.4" font-size="13" fill="#2C2A26" text-anchor="end" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">健康管理</text>
+<line x1="134.8" y1="316.4" x2="122.7" y2="325.2" stroke="#B9B2A2" stroke-width="1"/>
+<text x="114.6" y="331.1" font-size="13" fill="#2C2A26" text-anchor="end" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">時間管理</text>
+<line x1="110.0" y1="240.0" x2="95.0" y2="240.0" stroke="#B9B2A2" stroke-width="1"/>
+<text x="85.0" y="240.0" font-size="13" fill="#2C2A26" text-anchor="end" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">感情管理</text>
+<line x1="134.8" y1="163.6" x2="122.7" y2="154.8" stroke="#B9B2A2" stroke-width="1"/>
+<text x="114.6" y="148.9" font-size="13" fill="#2C2A26" text-anchor="end" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">潜在意識</text>
+<line x1="199.8" y1="116.4" x2="195.2" y2="102.1" stroke="#B9B2A2" stroke-width="1"/>
+<text x="192.1" y="92.6" font-size="13" fill="#2C2A26" text-anchor="end" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">量子力学</text>
+<circle cx="240" cy="240" r="58" fill="#FFFFFE" stroke="#B9B2A2" stroke-width="1.5"/>
+<text x="240" y="234" font-size="16" font-weight="700" fill="#2C2A26" text-anchor="middle" font-family="Shippori Mincho, serif">人格</text>
+<text x="240" y="254" font-size="12" fill="#2C2A26" text-anchor="middle" font-family="Noto Sans JP, sans-serif">×能力</text>
+</svg>
+    </div>
+  </section>
+
+  <!-- 第2章 P.55-70 -->
+  <section class="chapter" id="ch2" style="--accent:var(--c-ch2)">
+    <div class="chapter-head">
+      <span class="chapter-num">第2章</span>
+      <h2>自分の幸せを定義する</h2>
+    </div>
+    <p class="chapter-sub">幸せが持つ性質　<span class="pageref">（P.55-70）</span></p>
+
+    <div class="point"><div class="num">①</div><div class="body">
+      <h3>主体性が幸福度を高める</h3>
+      <p>主体性を発揮する</p>
+      <ul class="checklist">
+        <li>自分の人生を自分で選んでいる実感がある</li>
+        <li>周りの刺激・反応に影響されない</li>
+        <li>過去の奴隷ではなく、未来を創造できる（自分が未来を作れると確信している）</li>
+        <li>自分が選んだ選択に責任を持つ</li>
+      </ul>
+    </div></div>
+
+    <div class="point"><div class="num">②</div><div class="body">
+      <h3>男女それぞれの幸せの違いを理解する</h3>
+      <p>情報処理での脳の得意な使い方・使い方のクセの違いが、考え方・感じ方・行動の違いを生む。</p>
+      <p><strong>男性脳（遠距離攻撃型）</strong>：目的達成・問題解決を重視<br>
+      <strong>女性脳（近距離防衛型）</strong>：共感・関係性・安心を重視</p>
+      <p>人は自分と同じことで幸せになるとは限らない。だからこそ、自分と相手の幸せの違いを理解することが大切である。</p>
+    </div></div>
+
+    <div class="point"><div class="num">③</div><div class="body">
+      <h3>運をコントロールする</h3>
+      <p>T2S的な強運の方程式</p>
+      <div class="callout" style="margin:8px 0 0;">
+        <p>運 ＝ セルフイメージ × パラダイム（解釈） × RAS × 人格（立派な態度） × 準備 × 協力者の数・質 × 行動・習慣</p>
+      </div>
+    </div></div>
+
+    <div class="point"><div class="num">④</div><div class="body">
+      <h3>幸せの相乗効果</h3>
+      <p>幸せは「掛け算」によって加速する。</p>
+      <ul class="checklist">
+        <li>今の幸せ × 未来の幸せ</li>
+        <li>プロセスの幸せ × 結果の幸せ</li>
+        <li>忘れていた幸せ × 気づいている幸せ</li>
+      </ul>
+    </div></div>
+
+    <div class="point"><div class="num">⑤</div><div class="body">
+      <h3>地位財と非地位財</h3>
+      <p><strong>地位財</strong>：周りと比べて満足を得るもの<br>
+      <strong>非地位財</strong>：比較しなくても幸せを感じるもの</p>
+      <p>幸せは、時に地位財を中心に考えることで不幸になり、非地位財に気づいた人が幸せの土台を固め、地位財と上手に付き合えて、長期的な幸せを手にしている。</p>
+    </div></div>
+
+    <div class="point"><div class="num">⑥</div><div class="body">
+      <h3>経験・思い出が幸せを増やす</h3>
+      <p>人生の幸福（幸せ）は、「どれだけお金を貯めたか」ではなく、「経験の合計」「思い出」とその豊かさ。</p>
+      <p>今お金がなくても、それは行動しない理由にはならない。「今」にしかできない経験にどんどん投資すれば、そこから得られる豊かな思い出は年々大きくなり、一生あなたの人生を支え続ける。</p>
+    </div></div>
+
+    <div class="point"><div class="num">⑦</div><div class="body">
+      <h3>今の幸せ・未来の幸せ</h3>
+      <p>後悔しない幸せな人生を送るために、本気で死をイメージすることが重要である（定期的に、自分は死ぬということを思い出す）。人生の終わりをイメージする。</p>
+    </div></div>
+
+    <div class="callout" style="margin-top:22px;">
+      <div class="label">人が死ぬ前に後悔する10のこと</div>
+      <ol class="simple">
+        <li>働きすぎなければ良かった</li>
+        <li>自分の本当にやりたい事をやらなかった（冒険をしなかった）</li>
+        <li>他人の目を気にし過ぎた</li>
+        <li>早い段階で健康を大切にしなかった</li>
+        <li>大切な人達を優先しなかった</li>
+        <li>愛する人達に正直な気持ちを伝えなかった</li>
+        <li>友人や会いたい人に、継続的に会いに行かなかった</li>
+        <li>自己中心的だった</li>
+        <li>幸せを諦めなければ良かった</li>
+        <li>自分の生きた証を残さなかった</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 第3章 P.71-93 -->
+  <section class="chapter" id="ch3" style="--accent:var(--c-ch3)">
+    <div class="chapter-head">
+      <span class="chapter-num">第3章</span>
+      <h2>10の原則を学ぶ</h2>
+    </div>
+    <p class="chapter-sub">なぜ原則を学ぶのか？　結果は原則が支配しているから。パラダイムを原則に近づければ、結果をコントロールできる実感がある ⇒ 願望実現（夢の実現）ができる。<span class="pageref">（P.71-93）</span></p>
+
+    <h3 class="serif" style="font-size:15px;margin:22px 0 4px;">第1層　宇宙・存在の土台</h3>
+    <div class="point"><div class="num">①</div><div class="body">
+      <h3>無限大の原則（素粒子の世界）<span class="pageref">P.76-79</span></h3>
+      <p>①全ての情報がゼロポイントフィールドにあり、そこと繋がっていることで、自分の意識のレベルと同等の情報を送受信している。<br>
+      ②全員平等に全ての情報にアクセスできる。自分が求めることが明確でゼロポイントフィールドを理解している人は、無限の可能性を信じられる。</p>
+      <p>できる・できないではなく、本当はどうなりたいかを選ぶ。無限の可能性は、すでに存在している。あとは、一番欲しい未来を明確にし、その未来を選択し、信じて、行動するだけである。本気で描けば、その世界のパラレルに入れるということである。</p>
+    </div></div>
+
+    <h3 class="serif" style="font-size:15px;margin:22px 0 4px;">第2層　内側の仕組み</h3>
+    <div class="point"><div class="num">②</div><div class="body">
+      <h3>潜在意識の原則<span class="pageref">P.80-81</span></h3>
+      <p>①95%の潜在意識は、無意識で習慣化している<br>
+      ②潜在意識に何を入れ込むかが最重要である<br>
+      ③良くも悪くも、潜在意識（セルフイメージ、コンフォートゾーン）以上にはならない<br>
+      ④セルフイメージ、コンフォートゾーンに無意識に戻ろうとする<br>
+      ⑤寝る前に、願望実現した自分をイメージして1日を終える</p>
+    </div></div>
+    <div class="point"><div class="num">③</div><div class="body">
+      <h3>思考の原則<span class="pageref">P.82-83</span></h3>
+      <p>①脳は、観察した（意識した）情報だけを脳のRASで集める<br>
+      ②臨場感にあふれてイメージしたものは、脳では現実と同じことである。五感を通してイメージを強くするほど、同等の現実を作ろうとする。</p>
+    </div></div>
+    <div class="point"><div class="num">④</div><div class="body">
+      <h3>原因と結果の原則<span class="pageref">P.84</span></h3>
+      <p>①結果には必ず原因と縁がある<br>
+      ②結果はコントロールできないが、原因はコントロールできる。ゴールから逆算して、欲しい結果に必要な原因を作りましょう。</p>
+    </div></div>
+
+    <h3 class="serif" style="font-size:15px;margin:22px 0 4px;">第3層　現実との関わり方</h3>
+    <div class="point"><div class="num">⑤</div><div class="body">
+      <h3>バランスの原則<span class="pageref">P.85-86</span></h3>
+      <p>バランスを整えていなければ、長期の幸せと豊かさは手に入らない。</p>
+    </div></div>
+    <div class="point"><div class="num">⑥</div><div class="body">
+      <h3>表裏一体の原則<span class="pageref">P.87</span></h3>
+      <p>①全ての存在は、必ずプラスとマイナスで作られている。ゆえに、どちらを見るかによって世界は変わる<br>
+      ②全ての存在にプラスとマイナスがあると理解できるからこそ、フラットになれて、感謝という心のエネルギーが生まれる。</p>
+    </div></div>
+    <div class="point"><div class="num">⑦</div><div class="body">
+      <h3>鏡の原則<span class="pageref">P.88</span></h3>
+      <p>「常識と逆の仕組み」で動いている。結果を変えたいなら源になる「自分の内面」を動かす。</p>
+      <div class="callout" style="margin:8px 0 0;">
+        <div class="label">人間関係の3つのポイント</div>
+        <p>①自分がして欲しい事を相手にする<br>
+        ②相手が望んでいる事をしてあげる<br>
+        ③相手が大切にしているモノや事や人を、大切にしてあげる</p>
+      </div>
+    </div></div>
+    <div class="point"><div class="num">⑧</div><div class="body">
+      <h3>タイミングの原則<span class="pageref">P.89</span></h3>
+      <p>どうしてもコントロールできないエネルギーのタイミングがある。その時は逆らわず、投げやりにならずに、受け入れたり休んだり与えたりしていると、良いタイミングに切り替わっていく（焦らない）。</p>
+    </div></div>
+
+    <h3 class="serif" style="font-size:15px;margin:22px 0 4px;">第4層　行動・決断</h3>
+    <div class="point"><div class="num">⑨</div><div class="body">
+      <h3>成長の原則<span class="pageref">P.90-91</span></h3>
+      <p>①成長のスピードは、人の数だけ異なる<br>
+      ②宇宙は変化を望んでいる（原則）<br>
+      ③変化に対応しなければ、取り残される<br>
+      ④変化を先読みすると、さらに良くなる<br>
+      ⑤成長を中心に考えれば、失敗はすべてデータに変わる</p>
+    </div></div>
+    <div class="point"><div class="num">⑩</div><div class="body">
+      <h3>運命（決断）の原則<span class="pageref">P.92</span></h3>
+      <p>①宿命は変えられないが、学びと経験を積み重ねて本気で生きていれば、天命・使命・運命を生きていける<br>
+      ②過去の経験に、天命・使命を見つけるヒントがある</p>
+    </div></div>
+  </section>
+
+  <!-- 第4章 P.94-99 -->
+  <section class="chapter" id="ch4" style="--accent:var(--c-ch4)">
+    <div class="chapter-head">
+      <span class="chapter-num">第4章</span>
+      <h2>幸せの攻略法</h2>
+    </div>
+    <p class="chapter-sub"><span class="pageref">（P.94-99）</span></p>
+
+    <p style="font-size:14.5px;font-weight:700;margin-bottom:6px;">後悔のない人生を構成する「6つのゴール」</p>
+    <div style="display:flex;align-items:center;gap:18px;justify-content:center;flex-wrap:wrap;">
+      <svg viewBox="-20 -20 400 300" style="max-width:380px;width:100%;height:auto;">
+<line x1="-8" y1="240" x2="-8" y2="10" stroke="#2C2A26" stroke-width="1.5"/>
+<polygon points="-8,0 -14,12 -2,12" fill="#2C2A26"/>
+<polygon points="150.0,0.0 150.0,0.0 175.0,40.0 125.0,40.0" fill="#5B4A8A" stroke="#F7F4EE" stroke-width="1.5"/>
+<line x1="162.5" y1="20.0" x2="260" y2="20.0" stroke="#B9B2A2" stroke-width="1"/>
+<text x="266" y="20.0" font-size="13" fill="#2C2A26" text-anchor="start" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">6　天命</text>
+<polygon points="125.0,40.0 175.0,40.0 200.0,80.0 100.0,80.0" fill="#2C4C8C" stroke="#F7F4EE" stroke-width="1.5"/>
+<line x1="187.5" y1="60.0" x2="260" y2="60.0" stroke="#B9B2A2" stroke-width="1"/>
+<text x="266" y="60.0" font-size="13" fill="#2C2A26" text-anchor="start" dominant-baseline="middle" font-family="Noto Sans JP, sans-serif">5　自己実現</text>
+<polygon points="100.0,80.0 200.0,80.0 225.0,120.0 75.0,120.0" fill="#3F6E52" stroke="#F7F4EE" stroke-width="1.5"/>
+<text x="150.0" y="100.0" font-size="13" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-family="Shippori Mincho, serif">4　8バランス</text>
+<polygon points="75.0,120.0 225.0,120.0 250.0,160.0 50.0,160.0" fill="#4C7A94" stroke="#F7F4EE" stroke-width="1.5"/>
+<text x="150.0" y="140.0" font-size="13" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-family="Shippori Mincho, serif">3　人生での役割</text>
+<polygon points="50.0,160.0 250.0,160.0 275.0,200.0 25.0,200.0" fill="#B8863B" stroke="#F7F4EE" stroke-width="1.5"/>
+<text x="150.0" y="180.0" font-size="13" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-family="Shippori Mincho, serif">2　オリジナルの幸せ</text>
+<polygon points="25.0,200.0 275.0,200.0 300.0,240.0 0.0,240.0" fill="#9C3B3B" stroke="#F7F4EE" stroke-width="1.5"/>
+<text x="150.0" y="220.0" font-size="13" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-family="Shippori Mincho, serif">1　幸せ（感謝）</text>
+</svg>
+    </div>
+    <p class="note" style="text-align:center;margin-top:8px;margin-bottom:24px;">↑ 下から積み上がるほど、幸せが大きくなっていく</p>
+
+    <h3 class="serif" style="font-size:16px;margin:10px 0 10px;">幸せをクリアするための6つの構造</h3>
+    <ol class="simple">
+      <li>主体性を発揮する（自分が源、自己責任）</li>
+      <li>感謝体質になる</li>
+      <li>オリジナルの幸せを生きる ▶【ライフコンパス】</li>
+      <li>目的・目標達成能力（10の能力）特に感情管理、時間管理</li>
+      <li>原理原則（世界）を理解して生きる</li>
+      <li>習慣を味方につける</li>
+    </ol>
+    <div class="callout">
+      <div class="label">幸せを手にする最大の方法</div>
+      <p>愛と感謝を生きる</p>
+    </div>
+  </section>
+
+  <!-- 第5章 P.100-109 -->
+  <section class="chapter" id="ch5" style="--accent:var(--c-ch5)">
+    <div class="chapter-head">
+      <span class="chapter-num">第5章</span>
+      <h2>習慣化</h2>
+    </div>
+    <p class="chapter-sub"><span class="pageref">（P.100-109）</span></p>
+
+    <div class="callout">
+      <div class="label">習慣化の最大ポイント</div>
+      <p>「小さく、楽しく始める」</p>
+      <p>脳は負担を感じると新しいことを拒む。習慣が苦手なのではなく、しんどいこと・楽しくないことの習慣が嫌なだけ。→重要なことをいかに楽しくできるかが全て。</p>
+    </div>
+
+    <p style="font-size:14.5px;"><strong>6つの習慣でもっと重要なことは、コントロール出来る事に集中する。</strong><br>唯一自分の幸せをコントロールできるのは、自分の人格・能力である。</p>
+
+    <svg viewBox="-15 -15 370 350" style="max-width:340px;width:100%;height:auto;display:block;margin:14px auto;">
+      <circle cx="170" cy="165" r="150" fill="#9C3B3B" fill-opacity="0.08" stroke="#9C3B3B" stroke-width="1.5"/>
+      <text x="170" y="30" font-size="13" font-weight="700" fill="#9C3B3B" text-anchor="middle" font-family="Noto Sans JP, sans-serif">コントロールできない事</text>
+      <circle cx="130" cy="195" r="98" fill="#2C4C8C" fill-opacity="0.20" stroke="#2C4C8C" stroke-width="1.5"/>
+      <circle cx="205" cy="150" r="72" fill="#B8863B" fill-opacity="0.25" stroke="#B8863B" stroke-width="1.5"/>
+      <text x="90" y="235" font-size="13" font-weight="700" fill="#2C4C8C" text-anchor="middle" font-family="Noto Sans JP, sans-serif">コントロール</text>
+      <text x="90" y="250" font-size="13" font-weight="700" fill="#2C4C8C" text-anchor="middle" font-family="Noto Sans JP, sans-serif">できる事</text>
+      <text x="225" y="115" font-size="12.5" font-weight="700" fill="#8C6B4E" text-anchor="middle" font-family="Noto Sans JP, sans-serif">コントロールできる</text>
+      <text x="225" y="130" font-size="12.5" font-weight="700" fill="#8C6B4E" text-anchor="middle" font-family="Noto Sans JP, sans-serif">のにできていない事</text>
+    </svg>
+    <p class="note" style="text-align:center;margin-top:-8px;">内側の青い円が「コントロールできる事」、重なる金色の円が「コントロールできていない事」、外側の赤い円全体が「コントロールできない事」を表す</p>
+
+    <table class="control">
+      <tr><th>コントロールできる事</th><th>コントロールできていない事</th><th>コントロールできない事</th></tr>
+      <tr>
+        <td>起きる、歩く、読む、その他日常生活における一切の行動</td>
+        <td>健康管理（ダイエット、早起き、節酒、節煙）／金銭管理（投資、貯蓄）／時間管理／感情管理／未来に起こる出来事</td>
+        <td>他人を変える／達成不可能な領域に設定した目標／売上の増大／経費の削減／仕組み作り・育成／株やFXなどの相場／ギャンブル／寿命のコントロール／自然界の一切の出来事（天変地異）／バランス</td>
+      </tr>
+    </table>
+
+    <h3 class="serif" style="font-size:16px;margin:24px 0 10px;">6つの習慣で自分の幸せを一点集中する</h3>
+    <div class="habit-bar" style="background:#5B4A8A;"><span class="n">①</span>パラダイム（見方・枠組み）</div>
+    <div class="habit-bar" style="background:#B4472F;"><span class="n">②</span>行動（量と質）</div>
+    <div class="habit-bar" style="background:#3B6EA5;"><span class="n">③</span>言葉（セルフトーク）</div>
+    <div class="habit-bar" style="background:#A6862C;"><span class="n">④</span>考え方（思想・価値観）</div>
+    <div class="habit-bar" style="background:#4F8F5B;"><span class="n">⑤</span>イメージ（視覚化）</div>
+    <div class="habit-bar" style="background:#2F5233;"><span class="n">⑥</span>感情（エネルギー管理）</div>
+
+    <div class="callout" style="margin-top:20px;">
+      <div class="label">③言葉（セルフトーク）</div>
+      <p>普段使う言葉が、周波数の状態を正確に示す。だから、言葉で周波数を整えることができる。潜在意識に強く影響しているのが言葉である。言葉は、私たちのセルフイメージをつくる。</p>
+    </div>
+    <div class="callout">
+      <div class="label">⑥感情（エネルギー管理）</div>
+      <p>感情と生理反応は、直接コントロールできない。直接コントロールできるのは、思考と行為（考え方や行動）だけである。</p>
+      <svg viewBox="-15 -15 470 330" style="max-width:100%;height:auto;display:block;margin:14px auto 0;">
+  <ellipse cx="220" cy="160" rx="150" ry="60" fill="#FFFFFE" stroke="#DDD6C7" stroke-width="1.5"/>
+  <rect x="110" y="128" width="220" height="64" rx="28" fill="#8FA7B3" opacity="0.55"/>
+  <circle cx="145" cy="192" r="20" fill="#2C2A26"/>
+  <circle cx="295" cy="192" r="20" fill="#2C2A26"/>
+  <circle cx="220" cy="160" r="15" fill="#5B4A8A" stroke="#fff" stroke-width="2"/>
+
+  <line x1="220" y1="145" x2="220" y2="100" stroke="#B9B2A2" stroke-width="1"/>
+  <text x="220" y="88" font-size="13" fill="#2C2A26" text-anchor="middle" font-family="Noto Sans JP, sans-serif">願望（ハンドル）</text>
+
+  <line x1="292" y1="160" x2="330" y2="130" stroke="#B9B2A2" stroke-width="1"/>
+  <text x="333" y="126" font-size="13" fill="#2C2A26" text-anchor="start" font-family="Noto Sans JP, sans-serif">欲求充足</text>
+  <text x="333" y="142" font-size="13" fill="#2C2A26" text-anchor="start" font-family="Noto Sans JP, sans-serif">（エンジン）</text>
+
+  <line x1="148" y1="160" x2="110" y2="130" stroke="#B9B2A2" stroke-width="1"/>
+  <text x="107" y="126" font-size="13" fill="#2C2A26" text-anchor="end" font-family="Noto Sans JP, sans-serif">思考</text>
+  <text x="107" y="142" font-size="13" fill="#2C2A26" text-anchor="end" font-family="Noto Sans JP, sans-serif">（フォーカス）</text>
+
+  <line x1="165" y1="160" x2="130" y2="228" stroke="#B9B2A2" stroke-width="1"/>
+  <text x="128" y="245" font-size="13" fill="#2C2A26" text-anchor="middle" font-family="Noto Sans JP, sans-serif">行為</text>
+  <text x="128" y="261" font-size="13" fill="#2C2A26" text-anchor="middle" font-family="Noto Sans JP, sans-serif">（身体の使い方）</text>
+
+  <line x1="275" y1="160" x2="310" y2="228" stroke="#B9B2A2" stroke-width="1"/>
+  <text x="312" y="245" font-size="13" fill="#2C2A26" text-anchor="middle" font-family="Noto Sans JP, sans-serif">生理反応</text>
+
+  <line x1="220" y1="174" x2="220" y2="205" stroke="#B9B2A2" stroke-width="1"/>
+  <text x="220" y="219" font-size="13" fill="#2C2A26" text-anchor="middle" font-family="Noto Sans JP, sans-serif">感情</text>
+</svg>
+      <p class="note" style="text-align:center;">車にたとえた感情のコントロール構造（原図の図解イメージ）</p>
+    </div>
+  </section>
+
+  <!-- 第6章 P.110-115 -->
+  <section class="chapter" id="ch6" style="--accent:var(--c-ch6)">
+    <div class="chapter-head">
+      <span class="chapter-num">第6章</span>
+      <h2>コミットメント／半年後・未来の自分を決める</h2>
+    </div>
+    <p class="chapter-sub"><span class="pageref">（P.110-115）</span></p>
+
+    <div class="callout">
+      <div class="label">コミットメントの基本3原則</div>
+      <p>「今すぐやる」「何でもやる」「できるまでやる」</p>
+      <p>やるべき事は、自然と100%コミットメントできる願望や目標を見つけること。</p>
+    </div>
+
+    <p style="font-size:14.5px;">「決断の瞬間、運命が変わる」ーアンソニー・ロビンズ</p>
+    <p style="font-size:14.5px;">「成功者は必ず先に決めてから動く」ー高橋敏浩</p>
+    <p style="font-size:14.5px;">「変化の始まりは、決断した瞬間」。今日この場で決めたことを48時間以内に動き出す。</p>
+  </section>
+
+</main>
+
+<footer>
+  Takahashi 2days Seminar 2026 ver.2「T2Sのまとめ一覧」（P.116-123）をスキャン画像から文字起こししたものです。
+</footer>
+
+</body>
+</html>
